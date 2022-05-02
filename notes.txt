@@ -1,0 +1,180 @@
+Personal notes ahead, please disregard
+
+required packages
+ggplot2
+dplyr
+reshape for melt in matchupplots
+
+to do:
+
+goal UI:
+Summary Plots
+  Character Played Rates
+    Overall
+    PSN vs Steam
+    JPN vs USA
+    JPN vs Overall
+    USA vs Overall
+  Avg LP based on character choice
+
+Matchup Plots
+  Character vs. Totals
+    Need one for each char!
+  Character vs. Winrate%
+    By region?
+  Archetypes vs Cast?
+
+Efficiency
+  Top 10 players LP / Games
+  Bottom 10 players LP / Games
+  Avg LP / Character
+
+Text Reports
+  What could be done better
+    probably more interesting would be comparing data of high LP matches only instead of comparing the top ranked players records against the whole population.
+
+variable map
+"variable"
+choices
+
+"choose"
+Summary Plots
+  "summarychoice"
+  Character Played Rates
+    "regionrates"
+    Overall
+    PSN vs. Steam
+    JPN vs USA
+    JPN vs Overall
+    USA vs Overall
+  Average LP per Character
+
+Matchup Plots
+  "matchplot"
+  Matchup Winrates
+    "charchoice"
+    characters
+  Matchup Totals
+    "charchoice"
+    characters
+  Archetype Winrates
+    "archchoice"
+    Command Grabbers
+    Fireballers
+    Grapplers
+  Archetype Totals
+    "archchoice"
+    archetypes above
+
+Efficiency
+  "effchoice"
+  Most Efficient Players
+  Least Efficient Players
+  Character Efficiency
+
+Text Reports
+
+
+
+
+
+data shaping:
+# change region (if count < 10 -> OTHER)
+# convert percents to wins/losses
+
+playrate by region
+
+tables
+#summary table: regions, platforms, characters, etc
+
+charts
+characters
+regions 
+LP histograms (bin size?) (x bin, y count)
+games played histograms (bin size?)
+
+x bins of games played vs y avg lp
+
+winrates of projectile chars vs cast
+winrates of grapplers
+
+
+Dhals wins vs:
+
+
+Characters:
+  "Alex", "Birdie", "Cammy", "Chun", "Claw", "Dhalsim", "Dictator", "Fang", 
+  "Karin", "Ken", "Laura", "Nash", "Necalli", "RMika", "Rashid", "Ryu", "Zangief"
+
+  Fireballers:
+  Chun Dhalsim Fang Ken Nash  Rashid Ryu
+
+  Grapplers
+  Alex Birdie Laura? RMika Zangief
+
+  Cmd Grab
+  Alex Birdie Claw Laura Necalli RMika Zangief
+
+
+
+to reorder bar charts:
+reorder_size <- function(x) {
+	factor(x, levels = names(sort(table(x))))
+}
+aes(reorder_size(class))
+
+
+misc:
+global package installation -> sudo su - -c "R -e \"install.packages('PACKAGE')\""
+
+strings into variables
+> arg <- "Character"
+> ggplot(csv, aes(x = get(arg))) + geom_bar()
+
+run (execute) strings
+> args <- "ggplot(csv, aes(x = Character)) + geom_bar()"
+> eval(parse(text = args))
+
+x = character, y = frequency, fill = region position dodge
+make the frequencies yourself I guess
+
+
+
+matchup plots game plan
+sum for each character among samples
+x = character
+y = avg winrate (wins / (wins+loss))
+
+new data frame
+csv character
+  for i in characters[i]
+
+  character alex win/loss birdie...
+  alex
+  birdie
+
+  1    2   3   4   5
+  2/3  4/5 5/6 7/8 9/10  
+
+archetype plots game plan
+charsums 
+char alexwin alexloss birdie..
+row
+row
+
+archsums
+archetype opponent winrate
+row
+row
+row
+
+archwinrates
+reshape(winrates)
+
+archsums
+cmd grab sum(alexwin birdie claw laura nec rmika gief) sumloss
+
+Command Grabbers: Alex, Birdie, Claw, Laura, Necalli, RMika, Zangief.
+Fireballers: Chun, Dhalsim, Fang, Ken, Nash, Rashid, Ryu.
+Grapplers: Alex, Birdie, Laura, RMika, Zangief 
+

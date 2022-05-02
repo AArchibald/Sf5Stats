@@ -1,0 +1,13 @@
+Package: Sf5Stats
+Title: SFV Match-up/Odds Calculator
+Version: 0.0.0.1
+Authors@R: 
+    Andre Archibald <andre19@usf.edu>
+Description: This package aims to help novice players see which character would give them a better chance of winning. Takes information from online tournaments and ranking systems to calculate character match-ups.
+License: CC0
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Suggests: knitr, rmarkdown
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/AArchibald/Sf5Stats.git
